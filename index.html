@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Колесо Фортуны - Неон</title>
+    <title>Колесо Фортуны - Премиум</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
 
         body { 
-            background-color: #05010a; 
+            background-color: #020813; 
             color: #fff; 
             font-family: 'Montserrat', sans-serif; 
             display: flex; 
@@ -17,7 +17,8 @@
             justify-content: center; 
             min-height: 100vh; 
             margin: 0; 
-            background-image: radial-gradient(circle at center, #1a0033 0%, #05010a 100%);
+            overflow: hidden;
+            background-image: radial-gradient(circle at center, #0a2a5e 0%, #020813 70%);
         }
 
         .container { 
@@ -28,102 +29,126 @@
 
         .wheel-wrapper { 
             position: relative; 
-            width: 320px; 
-            height: 320px; 
+            width: 340px; 
+            height: 340px; 
             margin: 0 auto 40px; 
+            box-shadow: 0 0 60px rgba(0, 150, 255, 0.4), inset 0 0 20px rgba(0, 150, 255, 0.2);
+            border-radius: 50%;
         }
 
         .pointer { 
             position: absolute; 
-            top: -25px; 
+            top: -15px; 
             left: 50%; 
             transform: translateX(-50%); 
-            width: 0; 
-            height: 0; 
-            border-left: 15px solid transparent; 
-            border-right: 15px solid transparent; 
-            border-top: 35px solid #d500f9; 
-            z-index: 10; 
-            filter: drop-shadow(0 0 10px #d500f9); 
+            width: 30px; 
+            height: 40px; 
+            background: linear-gradient(135deg, #ffe066, #d4af37, #b8860b);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            z-index: 20; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 -2px 5px rgba(255,255,255,0.5);
         }
 
         .wheel { 
             width: 100%; 
             height: 100%; 
             border-radius: 50%; 
-            border: 8px solid #d500f9; 
-            box-shadow: 0 0 40px #d500f9, inset 0 0 20px #d500f9; 
+            border: 12px solid #d4af37; 
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.6); 
             transition: transform 5s cubic-bezier(0.25, 0.1, 0.1, 1); 
             position: relative; 
             background: conic-gradient(
-                #7b1fa2 0deg 60deg, 
-                #311b92 60deg 120deg, 
-                #7b1fa2 120deg 180deg, 
-                #311b92 180deg 240deg, 
-                #7b1fa2 240deg 300deg, 
-                #311b92 300deg 360deg
+                #d32f2f 0deg 30deg, 
+                #f5f5f5 30deg 60deg,
+                #d32f2f 60deg 90deg, 
+                #f5f5f5 90deg 120deg,
+                #d32f2f 120deg 150deg, 
+                #f5f5f5 150deg 180deg,
+                #d32f2f 180deg 210deg, 
+                #f5f5f5 210deg 240deg,
+                #d32f2f 240deg 270deg, 
+                #f5f5f5 270deg 300deg,
+                #d32f2f 300deg 330deg, 
+                #f5f5f5 330deg 360deg
             ); 
             overflow: hidden;
         }
 
-        /* Стили для эмодзи-иконок */
-        .icon {
+        .wheel::after {
+            content: '';
             position: absolute;
-            top: calc(50% - 25px); /* Центрируем по вертикали */
-            left: calc(50% - 25px); /* Центрируем по горизонтали */
-            width: 50px;
-            height: 50px;
-            font-size: 40px; /* Размер эмодзи */
-            line-height: 50px;
-            text-align: center;
-            /* Вращаем иконку, чтобы она встала в нужный сектор, а потом возвращаем ей ровное положение */
-            transform-origin: 25px 25px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ffe066, #d4af37, #b8860b);
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 10;
         }
 
-        /* Позиционируем каждую иконку в центр ее сектора (30, 90, 150, 210, 270, 330 градусов) */
-        .icon-1 { transform: rotate(30deg) translateY(-110px) rotate(-30deg); }
-        .icon-2 { transform: rotate(90deg) translateY(-110px) rotate(-90deg); }
-        .icon-3 { transform: rotate(150deg) translateY(-110px) rotate(-150deg); }
-        .icon-4 { transform: rotate(210deg) translateY(-110px) rotate(-210deg); }
-        .icon-5 { transform: rotate(270deg) translateY(-110px) rotate(-270deg); }
-        .icon-6 { transform: rotate(330deg) translateY(-110px) rotate(-330deg); }
+        .icon {
+            position: absolute;
+            top: calc(50% - 20px); 
+            left: calc(50% - 20px); 
+            width: 40px;
+            height: 40px;
+            font-size: 32px; 
+            line-height: 40px;
+            text-align: center;
+            z-index: 5;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .icon-1 { transform: rotate(15deg) translateY(-115px) rotate(-15deg); }
+        .icon-2 { transform: rotate(45deg) translateY(-115px) rotate(-45deg); }
+        .icon-3 { transform: rotate(75deg) translateY(-115px) rotate(-75deg); }
+        .icon-4 { transform: rotate(105deg) translateY(-115px) rotate(-105deg); }
+        .icon-5 { transform: rotate(135deg) translateY(-115px) rotate(-135deg); }
+        .icon-6 { transform: rotate(165deg) translateY(-115px) rotate(-165deg); }
+        .icon-7 { transform: rotate(195deg) translateY(-115px) rotate(-195deg); }
+        .icon-8 { transform: rotate(225deg) translateY(-115px) rotate(-225deg); }
+        .icon-9 { transform: rotate(255deg) translateY(-115px) rotate(-255deg); }
+        .icon-10 { transform: rotate(285deg) translateY(-115px) rotate(-285deg); }
+        .icon-11 { transform: rotate(315deg) translateY(-115px) rotate(-315deg); }
+        .icon-12 { transform: rotate(345deg) translateY(-115px) rotate(-345deg); }
 
         button { 
-            background-color: transparent; 
-            color: #fff; 
-            border: 2px solid #d500f9; 
-            padding: 15px 50px; 
-            font-size: 20px; 
-            font-weight: bold; 
-            border-radius: 30px; 
+            background: linear-gradient(to bottom, #ffe066, #d4af37); 
+            color: #000; 
+            border: none; 
+            padding: 15px 60px; 
+            font-size: 22px; 
+            font-weight: 900; 
+            border-radius: 40px; 
             cursor: pointer; 
             transition: 0.3s; 
-            box-shadow: 0 0 15px #d500f9, inset 0 0 15px #d500f9; 
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.5), inset 0 -3px 0 rgba(0,0,0,0.2); 
             text-transform: uppercase;
             letter-spacing: 2px;
         }
         
         button:hover { 
-            background-color: #d500f9; 
-            color: #000;
-            transform: scale(1.05); 
+            transform: translateY(-2px) scale(1.05); 
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.7);
         }
 
         button:disabled { 
-            border-color: #555; 
+            background: #555;
             box-shadow: none; 
-            color: #555;
+            color: #888;
             cursor: not-allowed; 
             transform: none; 
         }
 
         .result { 
             margin-top: 30px; 
-            font-size: 24px; 
-            color: #d500f9; 
+            font-size: 26px; 
+            color: #ffe066; 
             font-weight: 900; 
-            min-height: 30px; 
-            text-shadow: 0 0 10px rgba(213, 0, 249, 0.5);
+            min-height: 35px; 
+            text-shadow: 0 0 15px rgba(255, 224, 102, 0.6);
             text-transform: uppercase;
         }
     </style>
@@ -133,13 +158,18 @@
         <div class="wheel-wrapper">
             <div class="pointer"></div>
             <div class="wheel" id="wheel">
-                <!-- Теперь здесь только эмодзи! -->
-                <div class="icon icon-1">🍰</div> <!-- Десерт -->
-                <div class="icon icon-2">☕</div> <!-- Напиток -->
-                <div class="icon icon-3">🎁</div> <!-- Подарок -->
-                <div class="icon icon-4">10%</div> <!-- Скидка (текст, но маленький) -->
-                <div class="icon icon-5">🍕</div> <!-- Пицца -->
-                <div class="icon icon-6">🍔</div> <!-- Бургер -->
+                <div class="icon icon-1">🍰</div>
+                <div class="icon icon-2">☕</div>
+                <div class="icon icon-3">🍔</div>
+                <div class="icon icon-4">10%</div>
+                <div class="icon icon-5">🍕</div>
+                <div class="icon icon-6">🎁</div>
+                <div class="icon icon-7">🍰</div>
+                <div class="icon icon-8">☕</div>
+                <div class="icon icon-9">🍔</div>
+                <div class="icon icon-10">20%</div>
+                <div class="icon icon-11">🍕</div>
+                <div class="icon icon-12">🎁</div>
             </div>
         </div>
         <button id="spinBtn" onclick="spinWheel()">Крутить</button>
@@ -151,14 +181,20 @@
         const spinBtn = document.getElementById('spinBtn');
         const result = document.getElementById('result');
         
-        // Наши призы, которые будут выпадать
+        // Призы должны идти строго в том же порядке, что и картинки!
         const prizes = [
             "Десерт 🍰", 
             "Напиток ☕", 
-            "Подарок 🎁", 
+            "Бургер 🍔", 
             "Скидка 10%", 
             "Пицца 🍕", 
-            "Бургер 🍔"
+            "Подарок 🎁",
+            "Десерт 🍰", 
+            "Напиток ☕", 
+            "Бургер 🍔", 
+            "Скидка 20%", 
+            "Пицца 🍕", 
+            "Подарок 🎁"
         ];
 
         let currentRotation = 0;
@@ -167,20 +203,29 @@
             spinBtn.disabled = true;
             result.innerText = "";
             
-            const extraRotation = 1800 + Math.random() * 1800; 
-            currentRotation += extraRotation;
+            // 1. Выбираем случайный индекс от 0 до 11
+            const targetIndex = Math.floor(Math.random() * 12);
+            const targetPrize = prizes[targetIndex];
+            
+            // 2. Вычисляем центр нужного сектора (от 0 до 360 градусов)
+            // Индекс 0 - это от 0 до 30 град (центр 15). Индекс 1 - от 30 до 60 (центр 45).
+            const sectorCenter = (targetIndex * 30) + 15;
+            
+            // 3. Вычисляем, на сколько градусов нужно повернуть колесо, чтобы этот центр оказался вверху (на 0 градусов)
+            // Если центр на 15 град, нам нужно повернуть на 360 - 15 = 345 град.
+            const targetAngle = 360 - sectorCenter;
+            
+            // 4. Добавляем 5 полных оборотов (5 * 360 = 1800) для красоты
+            // и прибавляем остаток от прошлого вращения, чтобы колесо не дергалось назад
+            const currentMod = currentRotation % 360;
+            const rotationToAdd = 1800 + targetAngle - currentMod;
+            
+            currentRotation += rotationToAdd;
             
             wheel.style.transform = `rotate(${currentRotation}deg)`;
             
             setTimeout(() => {
-                const normalizedRotation = currentRotation % 360;
-                let sectorIndex = Math.floor((360 - (normalizedRotation % 360)) / 60);
-                
-                if (sectorIndex >= prizes.length) sectorIndex = 0;
-                
-                const wonPrize = prizes[sectorIndex];
-                result.innerText = "Ваш приз: " + wonPrize + "!";
-                
+                result.innerText = "Ваш приз: " + targetPrize + "!";
                 spinBtn.disabled = false;
             }, 5000); 
         }
