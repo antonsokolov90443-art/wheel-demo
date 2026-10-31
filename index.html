@@ -3,33 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Колесо Фортуны для Ресторана</title>
+    <title>Колесо Фортуны - Неон</title>
     <style>
-        body { background-color: #121212; color: #fff; font-family: 'Arial', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
-        .container { position: relative; text-align: center; }
-        .wheel-wrapper { position: relative; width: 300px; height: 300px; margin: 0 auto 30px; }
-        .pointer { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 40px solid #d4af37; z-index: 10; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); }
-        .wheel { width: 100%; height: 100%; border-radius: 50%; border: 10px solid #d4af37; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); transition: transform 5s cubic-bezier(0.25, 0.1, 0.1, 1); position: relative; background: conic-gradient(
-            #ff4d4d 0deg 60deg, 
-            #1e1e1e 60deg 120deg, 
-            #d4af37 120deg 180deg, 
-            #1e1e1e 180deg 240deg, 
-            #ff4d4d 240deg 300deg, 
-            #1e1e1e 300deg 360deg
-        ); }
-        button { background-color: #d4af37; color: #121212; border: none; padding: 15px 40px; font-size: 20px; font-weight: bold; border-radius: 30px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
-        button:hover { background-color: #ffd700; transform: scale(1.05); }
-        button:disabled { background-color: #555; cursor: not-allowed; box-shadow: none; transform: none; }
-        .result { margin-top: 25px; font-size: 24px; color: #d4af37; font-weight: bold; min-height: 30px; }
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
+
+        body { 
+            background-color: #05010a; 
+            color: #fff; 
+            font-family: 'Montserrat', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            background-image: radial-gradient(circle at center, #1a0033 0%, #05010a 100%);
+        }
+
+        .container { 
+            position: relative; 
+            text-align: center; 
+            padding: 20px;
+        }
+
+        .wheel-wrapper { 
+            position: relative; 
+            width: 320px; 
+            height: 320px; 
+            margin: 0 auto 40px; 
+        }
+
+        .pointer { 
+            position: absolute; 
+            top: -25px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 0; 
+            height: 0; 
+            border-left: 15px solid transparent; 
+            border-right: 15px solid transparent; 
+            border-top: 35px solid #d500f9; 
+            z-index: 10; 
+            filter: drop-shadow(0 0 10px #d500f9); 
+        }
+
+        .wheel { 
+            width: 100%; 
+            height: 100%; 
+            border-radius: 50%; 
+            border: 8px solid #d500f9; 
+            box-shadow: 0 0 40px #d500f9, inset 0 0 20px #d500f9; 
+            transition: transform 5s cubic-bezier(0.25, 0.1, 0.1, 1); 
+            position: relative; 
+            background: conic-gradient(
+                #7b1fa2 0deg 60deg, 
+                #311b92 60deg 120deg, 
+                #7b1fa2 120deg 180deg, 
+                #311b92 180deg 240deg, 
+                #7b1fa2 240deg 300deg, 
+                #311b92 300deg 360deg
+            ); 
+            overflow: hidden;
+        }
+
+        /* Стили для эмодзи-иконок */
+        .icon {
+            position: absolute;
+            top: calc(50% - 25px); /* Центрируем по вертикали */
+            left: calc(50% - 25px); /* Центрируем по горизонтали */
+            width: 50px;
+            height: 50px;
+            font-size: 40px; /* Размер эмодзи */
+            line-height: 50px;
+            text-align: center;
+            /* Вращаем иконку, чтобы она встала в нужный сектор, а потом возвращаем ей ровное положение */
+            transform-origin: 25px 25px;
+        }
+
+        /* Позиционируем каждую иконку в центр ее сектора (30, 90, 150, 210, 270, 330 градусов) */
+        .icon-1 { transform: rotate(30deg) translateY(-110px) rotate(-30deg); }
+        .icon-2 { transform: rotate(90deg) translateY(-110px) rotate(-90deg); }
+        .icon-3 { transform: rotate(150deg) translateY(-110px) rotate(-150deg); }
+        .icon-4 { transform: rotate(210deg) translateY(-110px) rotate(-210deg); }
+        .icon-5 { transform: rotate(270deg) translateY(-110px) rotate(-270deg); }
+        .icon-6 { transform: rotate(330deg) translateY(-110px) rotate(-330deg); }
+
+        button { 
+            background-color: transparent; 
+            color: #fff; 
+            border: 2px solid #d500f9; 
+            padding: 15px 50px; 
+            font-size: 20px; 
+            font-weight: bold; 
+            border-radius: 30px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            box-shadow: 0 0 15px #d500f9, inset 0 0 15px #d500f9; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        button:hover { 
+            background-color: #d500f9; 
+            color: #000;
+            transform: scale(1.05); 
+        }
+
+        button:disabled { 
+            border-color: #555; 
+            box-shadow: none; 
+            color: #555;
+            cursor: not-allowed; 
+            transform: none; 
+        }
+
+        .result { 
+            margin-top: 30px; 
+            font-size: 24px; 
+            color: #d500f9; 
+            font-weight: 900; 
+            min-height: 30px; 
+            text-shadow: 0 0 10px rgba(213, 0, 249, 0.5);
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="wheel-wrapper">
             <div class="pointer"></div>
-            <div class="wheel" id="wheel"></div>
+            <div class="wheel" id="wheel">
+                <!-- Теперь здесь только эмодзи! -->
+                <div class="icon icon-1">🍰</div> <!-- Десерт -->
+                <div class="icon icon-2">☕</div> <!-- Напиток -->
+                <div class="icon icon-3">🎁</div> <!-- Подарок -->
+                <div class="icon icon-4">10%</div> <!-- Скидка (текст, но маленький) -->
+                <div class="icon icon-5">🍕</div> <!-- Пицца -->
+                <div class="icon icon-6">🍔</div> <!-- Бургер -->
+            </div>
         </div>
-        <button id="spinBtn" onclick="spinWheel()">Крутить!</button>
+        <button id="spinBtn" onclick="spinWheel()">Крутить</button>
         <div class="result" id="result"></div>
     </div>
 
@@ -38,13 +151,14 @@
         const spinBtn = document.getElementById('spinBtn');
         const result = document.getElementById('result');
         
+        // Наши призы, которые будут выпадать
         const prizes = [
+            "Десерт 🍰", 
+            "Напиток ☕", 
+            "Подарок 🎁", 
             "Скидка 10%", 
-            "Бесплатный десерт 🍰", 
-            "Скидка 20%", 
-            "Напиток в подарок ☕", 
-            "Попробуй еще раз 🎲", 
-            "Скидка 15%"
+            "Пицца 🍕", 
+            "Бургер 🍔"
         ];
 
         let currentRotation = 0;
@@ -53,14 +167,12 @@
             spinBtn.disabled = true;
             result.innerText = "";
             
-            // Случайное количество оборотов (от 5 до 10) + случайный угол
             const extraRotation = 1800 + Math.random() * 1800; 
             currentRotation += extraRotation;
             
             wheel.style.transform = `rotate(${currentRotation}deg)`;
             
             setTimeout(() => {
-                // Вычисляем выигрышный сектор (360 градусов / 6 секторов = 60 градусов)
                 const normalizedRotation = currentRotation % 360;
                 let sectorIndex = Math.floor((360 - (normalizedRotation % 360)) / 60);
                 
@@ -70,7 +182,7 @@
                 result.innerText = "Ваш приз: " + wonPrize + "!";
                 
                 spinBtn.disabled = false;
-            }, 5000); // 5 секунд анимации
+            }, 5000); 
         }
     </script>
 </body>
